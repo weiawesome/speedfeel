@@ -1,0 +1,66 @@
+name: 部署-GitHub Page
+
+on:
+  workflow_run:
+    workflows: [檢查-品質]
+    types: [completed]
+    branches: [main]
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: cd-pages
+  cancel-in-progress: true
+
+jobs:
+  cd-pages:
+    name: 部署-GitHub Page
+    if: >-
+      github.event_name == 'push' ||
+      (
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_branch == 'main'
+      )
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: actions/configure-pages@v5
+
+      - name: 核對版本
+        if: github.event_name == 'push'
+        run: node --input-type=module -e 'import { readFileSync } from "node:fs"; const version = JSON.parse(readFileSync("package.json", "utf8")).version; const tag = process.env.GITHUB_REF_NAME; if (tag !== `v${version}`) { console.error(`這個 tag 是 ${tag}，package.json 是 ${version}，兩個不一樣`); process.exit(1) }'
+
+      - name: 安裝
+        run: npm ci
+
+      - name: 建置
+        run: npm run build
+        env:
+          GITHUB_PAGES: 'true'
+
+      - name: 讓 /why 重新整理進得去
+        run: cp dist/index.html dist/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

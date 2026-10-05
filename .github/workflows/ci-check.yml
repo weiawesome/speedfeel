@@ -1,0 +1,48 @@
+name: 檢查-品質
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci-check:
+    name: 檢查-品質
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: 安裝
+        run: npm ci
+
+      - name: 檢查程式
+        run: npm run lint
+
+      - name: 測試
+        run: npm test
+
+      - name: 建置
+        run: npm run build
+
+      - name: 安裝瀏覽器
+        run: npx playwright install --with-deps chromium
+
+      - name: 無障礙檢查
+        run: npm run a11y
+
+      - name: 上傳無障礙報告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-report
+          path: a11y-report/report.json
+          if-no-files-found: ignore

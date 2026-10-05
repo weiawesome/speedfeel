@@ -1,0 +1,46 @@
+name: 錯誤
+description: 模擬、測速或頁面行為和你看到的不一樣
+title: "錯誤: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: happened
+    attributes:
+      label: 發生了什麼
+      description: 哪個畫面、當時的網速、畫面停在哪。
+      placeholder: 例如短影音停在緩衝，網速顯示 21Mbps。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 你預期會怎樣
+    validations:
+      required: true
+  - type: dropdown
+    id: scene
+    attributes:
+      label: 哪一個畫面
+      options:
+        - 影片
+        - 短影音
+        - 動態
+        - 為什麼做這個
+        - 測速
+        - 其他
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: 裝置與瀏覽器
+      placeholder: 例如 iPhone Safari、桌面 Chrome
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 怎麼重現
+      description: 從打開頁面開始，一步一步寫。
+    validations:
+      required: true
