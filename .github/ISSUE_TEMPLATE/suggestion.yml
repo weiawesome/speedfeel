@@ -1,0 +1,36 @@
+name: 建議
+description: 模擬的感覺、說明文字或操作想改成另一種
+title: "建議: "
+labels: ["suggestion"]
+body:
+  - type: textarea
+    id: change
+    attributes:
+      label: 你想改什麼
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 為什麼
+      description: 現在的感覺哪裡不對，或少了什麼。
+    validations:
+      required: true
+  - type: dropdown
+    id: scene
+    attributes:
+      label: 關於哪一個畫面
+      options:
+        - 影片
+        - 短影音
+        - 動態
+        - 為什麼做這個
+        - 整個網站
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: instead
+    attributes:
+      label: 你覺得應該變成什麼
+      description: 有具體例子最好。沒有也可以留空。

@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Schibsted Grotesk', 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  --color-ground: #e3e8f1;
+  --color-aluminum: #d5dde6;
+  --color-ink: #1b2430;
+  --color-paper: #f7f6f3;
+  --color-screen: #141a22;
+  --color-muted: #3e4c59;
+  --color-slow: #f0b09a;
+  --color-mid: #9ec0dc;
+  --color-fast: #2457d6;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+.band-flow {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 18px,
+    rgba(255, 255, 255, 0.32) 18px 20px
+  );
+  animation-name: drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 0;
+  }
+}
+
+.reel-scroll,
+.feed-scroll {
+  scrollbar-width: none;
+}
+
+.reel-scroll::-webkit-scrollbar,
+.feed-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.reel-disc {
+  animation: spin 3.2s linear infinite;
+}
+
+.reel-heart {
+  animation: reel-heart 0.7s ease-out forwards;
+}
+
+.danmaku-pass {
+  animation: danmaku-pass 12s linear infinite;
+}
+
+@keyframes danmaku-pass {
+  from {
+    transform: translateX(110%);
+  }
+  to {
+    transform: translateX(-120%);
+  }
+}
+
+@keyframes reel-heart {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.35) translateY(-12px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin {
+    animation: none;
+    border-color: white;
+  }
+
+  .band-flow,
+  .reel-disc,
+  .reel-heart,
+  .danmaku-pass {
+    animation: none;
+    transition: none;
+  }
+}
