@@ -1,9 +1,9 @@
 # speedfeel
 
-[![CI dev](https://img.shields.io/badge/CI-dev-1b2430)](https://github.com/weiawesome/speedfeel/actions)
-[![CI main](https://img.shields.io/badge/CI-main-1b2430)](https://github.com/weiawesome/speedfeel/actions)
-[![CodeQL](https://img.shields.io/badge/CodeQL-JS%20%2F%20TS-1b2430)](https://github.com/weiawesome/speedfeel)
-[![MIT](https://img.shields.io/badge/license-MIT-1b2430)](LICENSE)
+[![CI dev](https://img.shields.io/github/actions/workflow/status/weiawesome/speedfeel/ci-check.yml?branch=dev&label=CI%20dev)](https://github.com/weiawesome/speedfeel/actions/workflows/ci-check.yml?query=branch%3Adev)
+[![CI main](https://img.shields.io/github/actions/workflow/status/weiawesome/speedfeel/ci-check.yml?branch=main&label=CI%20main)](https://github.com/weiawesome/speedfeel/actions/workflows/ci-check.yml?query=branch%3Amain)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/weiawesome/speedfeel/ci-codeql.yml?branch=main&label=CodeQL)](https://github.com/weiawesome/speedfeel/actions/workflows/ci-codeql.yml)
+[![MIT](https://img.shields.io/github/license/weiawesome/speedfeel)](LICENSE)
 
 選一個網速，看長片、短影音和動態實際是什麼感覺。方案上的 Mbps 只是數字，這裡讓等待、緩衝和畫質變成看得到的事。
 
