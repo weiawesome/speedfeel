@@ -26,7 +26,7 @@ export default function Why() {
         </a>
       </header>
       <main>
-        <article className="mx-auto w-full max-w-[640px] px-5 pt-14 pb-4" aria-labelledby="why-title">
+        <article className="mx-auto w-full max-w-[640px] px-5 pt-4 pb-4" aria-labelledby="why-title">
           <h1 id="why-title" className="text-[28px] leading-tight font-semibold">
             為什麼做這個
           </h1>
